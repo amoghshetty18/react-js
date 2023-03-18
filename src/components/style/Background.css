@@ -1,0 +1,36 @@
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  height: 105vh;
+  width: 100vw;
+  flex-direction: column;
+  align-content: center;
+  z-index: 1;
+}
+
+.grid-border {
+  width: calc((100vh / 7));
+  height: calc((100vh / 7));
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.bg-grid-animation {
+  animation: bg-grid-glow 1s ease-in;
+}
+@keyframes bg-grid-glow {
+  0% {
+    background-color: rgba(var(--light-rgb), 0);
+  }
+  5% {
+    background-color: rgba(var(--light-rgb), var(--bg-grid-opacity));
+  }
+  50% {
+    background-color: rgba(var(--light-rgb), var(--bg-grid-opacity));
+  }
+  100% {
+    background-color: rgba(var(--light-rgb), 0);
+  }
+}

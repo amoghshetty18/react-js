@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+      integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- <script
+			src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.0.3/tilt.jquery.min.js"
+			integrity="sha512-14AZ/DxUrlF26z6v7egDkpJHKyJRn/7ue2BgpWZ/fmqrqVzf4PrQnToy99sHmKwzKev/VZ1tjPxusuTV/n8CcQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script> -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"
+      integrity="sha512-K9tDZvc8nQXR1DMuT97sct9f40dilGp97vx7EXjswJA+/mKqJZ8vcZLifZDP+9t08osMLuiIjd4jZ0SM011Q+w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.1.21/tilt.jquery.min.js" integrity="sha512-zHvEsOKUsx5l+X8JJc4s8P8nkcvS6SVbKyXYtyRjnppRr/h7y/0VNbhNsV42n++s8nnKiCzZ7XCxkETKmPeycQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js" integrity="sha512-u1L7Dp3BKUP3gijgSRoMTNxmDl/5o+XOHupwwa7jsI1rMzHrllSLKsGOfqjYl8vrEG+8ghnRPNA/SCltmJCZpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"
+      integrity="sha512-Y8iWYJDo6HiTo5xtml1g4QqHtl/PO1w+dmUpQfQSOTqKNsMhExfyPN2ncNAe9JuJUSKzwK/b6oaNPop4MXzkwg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+      :root {
+        --light: #fff;
+        --dark: #000;
+        --primary: #ff2868;
+        --light-rgb: 255, 255, 255;
+        --dark-rgb: 0, 0, 0;
+        --primary-rgb: 255, 40, 104;
+        --bg-grid-opacity: 0.05;
+      }
+      body {
+        background-color: var(--dark);
+        overflow: hidden;
+        overscroll-behavior: contain;
+      }
+      #bg-grid {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        z-index: 1;
+      }
+      #bg-grid > div {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        width: calc((100vh / 7));
+        height: calc((100vh / 7));
+        border: 1px solid rgba(var(--light-rgb), 0.1);
+      }
+      .bg-grid-animation {
+        animation: bg-grid-glow 1s ease-in;
+      }
+      @keyframes bg-grid-glow {
+        0% {
+          background-color: rgba(var(--light-rgb), 0);
+        }
+        5% {
+          background-color: rgba(var(--light-rgb), var(--bg-grid-opacity));
+        }
+        50% {
+          background-color: rgba(var(--light-rgb), var(--bg-grid-opacity));
+        }
+        100% {
+          background-color: rgba(var(--light-rgb), 0);
+        }
+      }
+    </style>
+    <title>Social Tag</title>
+  </head>
+  <body>
+    <div id="bg-grid"></div>
+
+    <script>
+      function randomInt(min, max) {
+        // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      inBgTransition = false;
+      $("#bg-grid>div").css("opacity", "0");
+
+      setBackgroundGrid();
+      function setBackgroundGrid() {
+        let boxWidth = $(window).outerHeight() / 7;
+        let windowWidth = $(window).outerWidth();
+        let boxTemplate = `<div></div>`;
+        $("#bg-grid").html(
+          boxTemplate.repeat(Math.ceil(windowWidth / boxWidth) * 7)
+        );
+
+        if (window.innerWidth > 600) {
+          //binding hover animation with background grid boxes
+          $("#bg-grid>div").hover(function () {
+            $(this).addClass("bg-grid-animation");
+          });
+          $("#bg-grid>div").bind(
+            "webkitAnimationEnd mozAnimationEnd animationend",
+            function () {
+              $(this).removeClass("bg-grid-animation");
+            }
+          );
+        }
+
+        $("#bg-grid>div").click(function () {
+          if (inBgTransition) return;
+          inBgTransition = true;
+
+          let animColor = `rgba(${randomInt(10, 255)},${randomInt(
+            10,
+            255
+          )},${randomInt(10, 255)},${randomInt(20, 30) / 100})`;
+
+          anime({
+            targets: "#bg-grid>div",
+            scale: [
+              { value: 0.9, duration: 500 },
+              { value: 1, duration: 500 },
+            ],
+            backgroundColor: [
+              {
+                value: animColor,
+                duration: 500,
+              },
+              { value: "rgba(0,0,0,0)", duration: 500 },
+            ],
+            delay: anime.stagger(100, {
+              grid: [7, 12],
+              from: $(this).index(),
+            }),
+            easing: "easeInOutQuad",
+            complete: () => {
+              inBgTransition = false;
+            },
+          });
+          console.log($(this).index());
+        });
+      }
+    </script>
+  </body>
+</html>
