@@ -1,0 +1,27 @@
+.home1-container {
+  margin: auto;
+  width: 50%;
+  z-index: 4;
+}
+
+.home1-heading {
+  font-size: 90px;
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  color: var(--light);
+}
+
+p {
+  font-weight: 400;
+  color: rgba(var(--light-rgb), 0.5);
+  font-size: 30px;
+  width: 60%;
+  margin: auto;
+  text-align: center;
+}
+
+span {
+  color: red;
+}

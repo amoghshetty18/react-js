@@ -1,0 +1,20 @@
+.home2-container {
+  margin: auto;
+  width: 50%;
+  z-index: 4;
+}
+
+.home2-heading {
+  font-size: min(65px, 7vw);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--light);
+  z-index: 4;
+  position: relative;
+}
+
+.fill {
+  color: white;
+}

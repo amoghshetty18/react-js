@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style/Background.css";
 import anime from "animejs";
 
@@ -47,15 +47,23 @@ function Background() {
         inBgTransition = false;
       },
     });
-    console.log(ind);
   }
   const numEls = numBoxes();
+  const [hover, setHover] = useState(false);
   return (
     <div className="background-container" style={{ color: "white" }}>
       {numEls.map((i) => {
         return (
           <div
-            className="grid-border"
+            onMouseEnter={(event) => {
+              setHover(true);
+              event.target.classList.add("bg-grid-animation");
+            }}
+            onMouseLeave={(event) => {
+              event.target.classList.remove("bg-grid-animation");
+              setHover(false);
+            }}
+            className={`grid-border`}
             key={i}
             onClick={(event) => {
               handleClick(event, i);

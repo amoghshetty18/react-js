@@ -6,10 +6,13 @@
   --dark-rgb: 0, 0, 0;
   --primary-rgb: 255, 40, 104;
   --bg-grid-opacity: 0.05;
+  --default-cursor: url("./assets/arrow2.png"), auto;
+  --pointer-cursor: url("./assets/pointer2.png"), pointer;
 }
 * {
   margin: 0;
   padding: 0;
+  cursor: var(--default-cursor);
   overscroll-behavior-y: contain;
 }
 

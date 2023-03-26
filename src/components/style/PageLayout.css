@@ -1,0 +1,108 @@
+.pageHome {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#logo {
+  z-index: 4;
+  height: 50px;
+  margin: 25px;
+}
+
+.menu-icon {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  opacity: 0.7;
+  position: fixed;
+  top: 32px;
+  right: 38px;
+  z-index: 4;
+}
+
+.menu-icon-line {
+  width: 100%;
+  height: 4px;
+  background-color: var(--light);
+}
+
+.menu-icon-line:nth-child(2n) {
+  width: 80%;
+}
+
+.menu-circle {
+  height: 60px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.menu-circle:hover {
+  cursor: var(--pointer-cursor);
+}
+
+.section-nav {
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 7;
+  pointer-events: all;
+}
+
+.section-nav > img:hover {
+  cursor: var(--pointer-cursor);
+  opacity: 0.9;
+  scale: 1.1;
+}
+
+.arrow {
+  width: 40px;
+  opacity: 0.7;
+  transition-duration: 200ms;
+}
+
+#up-arrow {
+  transform: scaleY(-1);
+}
+
+footer {
+  display: flex;
+  font-size: 25px;
+  justify-content: space-between;
+}
+
+.lets-talk {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px dashed var(--primary);
+  transition-duration: 300ms;
+  margin: 25px;
+  font-size: inherit;
+  padding: 8px 16px;
+  pointer-events: all;
+  z-index: 4;
+}
+
+.cur-pg {
+  padding: 8px 16px;
+  color: var(--light, 0.5);
+  margin: 25px;
+  font-size: inherit;
+  text-align: center;
+}
